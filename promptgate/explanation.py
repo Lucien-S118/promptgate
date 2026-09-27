@@ -57,7 +57,7 @@ def explain_review(prompt: str, api_key: str, *, opener=None, timeout=30) -> dic
     except HTTPError as exc:
         exc.close()
         outcome['status']=f'http_{exc.code}'
-    except (URLError,OSError,ValueError,KeyError,TypeError,UnicodeError):
+    except (URLError,OSError,ValueError,KeyError,TypeError,AttributeError,UnicodeError):
         pass
     outcome['latency_ms']=(time.perf_counter()-start)*1000
     return outcome

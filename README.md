@@ -1,6 +1,6 @@
 # PromptGate
 
-PE6201 individual project by Siwen Liu. PromptGate is a small safety gateway placed before an enterprise RAG assistant. It screens one English input and returns a fixed `Allow`, `Block`, or `Review` decision, a score, and a reason. A downstream RAG system and tool execution are outside this prototype.
+PE6201 individual project by SIwen Liu. PromptGate is a small safety gateway placed before an enterprise RAG assistant. It screens one English input and returns a fixed `Allow`, `Block`, or `Review` decision, a score, and a reason. A downstream RAG system and tool execution are outside this prototype.
 
 The design follows the August Problem Statement and the instructor's September feedback:
 
@@ -13,7 +13,7 @@ The design follows the August Problem Statement and the instructor's September f
 
 ## Quick start
 
-Python 3.9+ is supported. The included frozen model artifacts let the local console run without downloading datasets.
+Python 3.11+ is required for the ML and web-app extras. The included frozen model artifacts let the local console run without downloading datasets.
 
 ```sh
 python3 -m venv .venv
@@ -24,7 +24,7 @@ python3 -m venv .venv
 
 Open `http://127.0.0.1:8765/`. The console makes no network call for `/screen`; an OpenRouter key is required only if a reviewer explicitly asks for an explanation of a `Review` case. The key is accepted for one request in memory and is never written to a file.
 
-The default model is the frozen Naive Bayes model trained on the original 11,089 S-Labs rows. The second option is a word-and-character logistic regression model. Both use the same frozen source-domain policy procedure.
+The default model is the frozen Naive Bayes model trained on the original 11,089 S-Labs rows. The second option is a word-and-character logistic regression model. The web console applies the hybrid policy: a high score blocks, a near-boundary score goes to Review, and only a low score is allowed. The binary classifier-only numbers below are reported separately from the web application's hybrid numbers.
 
 ## Reproduce the data and model
 
@@ -62,7 +62,7 @@ The deepset metadata contains inconsistent license labels. It is therefore used 
 
 ## Measured results
 
-The submitted evidence is in `evidence/teacher-11089-summary.json`; the full local run is `results/runs/teacher-11089-external-20260925-01/summary.json`. The selected candidate is Naive Bayes because it had the highest policy-split attack recall while meeting the 5% development FPR cap. The external FPR is reported exactly as observed.
+The submitted evidence is in `evidence/teacher-11089-summary.json`; the full local run is `results/runs/teacher-11089-external-20260925-01/summary.json`. The selected candidate is Naive Bayes because it had the highest policy-split attack recall while meeting the 5% development FPR cap. The web application uses its frozen hybrid Review policy; the classifier-only row is a paired comparison. External FPR is reported exactly as observed.
 
 | Frozen policy | Data | Attack block recall | Benign block FPR | Review rate | Confusion (TP/FP/FN/TN) |
 |---|---:|---:|---:|---:|---|
@@ -70,9 +70,9 @@ The submitted evidence is in `evidence/teacher-11089-summary.json`; the full loc
 | Naive Bayes | S-Labs remaining test, n=2,001 | 95.6% | 4.8% | 0.0% | — |
 | Naive Bayes | external deepset original, n=662 | 79.8% | **43.1%** | 0.0% | **210/172/53/227** |
 | Logistic word+character | external deepset original, n=662 | 69.2% | 16.0% | 0.0% | — |
-| Hybrid selected Naive Bayes + Review | external deepset original, n=662 | 76.4% | 36.8% | 27.9% | — |
+| **Hybrid selected Naive Bayes + Review (web app)** | external deepset original, n=662 | **76.4%** | **36.8%** | **27.9%** | 201/147/62/252 |
 
-The external result does not meet the 5% FPR aspiration. It demonstrates domain shift: a threshold that is safe on the S-Labs development distribution is not safe on this external set. This is the main business/technical trade-off in the project and is kept visible in the UI and report.
+The external results do not meet the 5% FPR aspiration. For the web application's hybrid policy, Review captured 53 of 225 counterfactual binary errors (23.6%) before abstention. This demonstrates domain shift: a threshold that is safe on the S-Labs development distribution is not safe on this external set. This is the main business/technical trade-off in the project and is kept visible in the UI and report.
 
 The separate 100-row live GPT-4o-mini MVP run made 100 real OpenRouter calls with no technical failures. It blocked 25/50 attacks (50.0% recall), blocked 0/50 benign prompts (0% FPR), sent 13% to Review, had p95 latency 3.42 seconds, and cost US$0.0066129 according to provider usage. It did not meet the historical 58.3% MVP target. That 58.3% value is a cited reference, not this project's result.
 

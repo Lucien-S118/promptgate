@@ -34,6 +34,11 @@
     "logistic_external_benign_block_fpr": 0.1604010025,
     "hybrid_external_attack_block_recall": 0.7642585551,
     "hybrid_external_benign_block_fpr": 0.3684210526,
-    "hybrid_external_review_rate": 0.2794561934
+    "hybrid_external_review_rate": 0.2794561934,
+    "hybrid_external_review_n": 185,
+    "hybrid_external_counterfactual_binary_errors": 225,
+    "hybrid_external_binary_errors_captured_by_review": 53,
+    "hybrid_external_review_error_capture_rate": 0.2355555556,
+    "hybrid_external_confusion": {"tp": 201, "fp": 147, "fn": 62, "tn": 252}
   }
 }

@@ -6,12 +6,12 @@ build-backend = "setuptools.build_meta"
 name = "promptgate-course"
 version = "0.1.0"
 description = "Auditable prompt-injection screening for the PE6201 individual project"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 dependencies = []
 
 [project.optional-dependencies]
 data = ["pyarrow>=18,<24"]
-ml = ["scikit-learn>=1.6,<2"]
+ml = ["scikit-learn==1.9.1"]
 app = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1", "httpx>=0.27,<1"]
 
 [project.scripts]

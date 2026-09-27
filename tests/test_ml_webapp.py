@@ -98,6 +98,15 @@ class ExplanationTests(unittest.TestCase):
         self.assertEqual(res['action'],'Review')
         self.assertEqual(res['status'],'ok')
 
+    def test_structurally_invalid_provider_response_fails_closed(self):
+        class FakeOpener:
+            def open(self,request,timeout):
+                value={'choices':['not-an-object']}
+                return io.BytesIO(json.dumps(value).encode())
+        res=explain_review('a prompt','sk-or-test',opener=FakeOpener())
+        self.assertEqual(res['action'],'Review')
+        self.assertEqual(res['status'],'unavailable')
+
 
 if __name__=='__main__':
     unittest.main()
