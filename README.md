@@ -16,7 +16,7 @@ The design follows the August Problem Statement and the instructor's September f
 Python 3.11+ is required for the ML and web-app extras. The included frozen model artifacts let the local console run without downloading datasets.
 
 ```sh
-python3 -m venv .venv
+python3.11 -m venv .venv  # or any installed Python 3.11+ interpreter
 .venv/bin/python -m pip install -e '.[ml,app]'
 .venv/bin/python -m unittest discover -s tests -v
 .venv/bin/python -m promptgate.webapp
