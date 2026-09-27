@@ -1,0 +1,3 @@
+# Exact optional data-reader version verified with Python 3.12 on macOS arm64.
+# The scanner and unit tests use the Python standard library only.
+pyarrow==23.0.1

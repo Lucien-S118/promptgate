@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.env
+.env.*
+!.env.example
+data/
+results/runs/
+models/
+!models/teacher-11089/
+!models/teacher-11089/*.joblib
+!models/teacher-11089/*.json
+.DS_Store

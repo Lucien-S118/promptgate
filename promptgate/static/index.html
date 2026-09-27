@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PromptGate Review Console</title>
+<style>
+:root{font:16px/1.55 system-ui,sans-serif;color:#1c2634;background:#f4f7fb}*{box-sizing:border-box}
+main{max-width:850px;margin:50px auto;padding:0 22px}h1{font-size:2.2rem;margin:0}h2{font-size:1.2rem;margin-bottom:5px}p{margin:7px 0 18px;color:#546172}
+.panel{background:white;border:1px solid #dbe3ed;border-radius:14px;padding:24px;margin:22px 0;box-shadow:0 6px 24px #1232 05}
+label{display:block;font-weight:600;margin:16px 0 7px}textarea,input,select{width:100%;font:inherit;padding:11px;border:1px solid #b9c7d9;border-radius:7px;background:white}
+textarea{min-height:130px;resize:vertical}button{background:#233e69;color:white;border:0;border-radius:7px;padding:12px 18px;font:inherit;cursor:pointer;margin-top:14px}button:disabled{opacity:.5;cursor:default}
+.badge{display:inline-block;border-radius:20px;padding:5px 13px;font-weight:700;background:#edf3f9}.Allow{color:#176146;background:#e6f7ed}.Block{color:#a32727;background:#fde9e7}.Review{color:#8b5a09;background:#fff2d4}
+dl{display:grid;grid-template-columns:190px 1fr;gap:8px;margin:14px 0}dt{font-weight:600;color:#546172}dd{margin:0;overflow-wrap:anywhere}.minor{font-size:.88rem;color:#5f6f82}.hidden{display:none}
+</style><main><h1>PromptGate</h1><p>Local prompt-injection review console · PE6201 individual project</p>
+<section class="panel"><h2>Screen one English input</h2><p>The fixed classifier and rules make the safety decision before any optional LLM explanation.</p>
+<label for="prompt">Prompt to screen</label><textarea id="prompt" maxlength="8000" placeholder="Enter an English prompt"></textarea>
+<label for="model">Frozen model</label><select id="model"><option value="naive_bayes">Naive Bayes, trained on 11,089 original rows</option><option value="logistic_word_char">Logistic regression, word and character features</option></select>
+<button id="run">Screen input</button><p id="error" role="alert"></p></section>
+<section class="panel hidden" id="result"><h2>Decision <span id="badge" class="badge"></span></h2><dl>
+<dt>Risk score</dt><dd id="score"></dd><dt>Reason</dt><dd id="reason"></dd>
+<dt>Model</dt><dd id="modelName"></dd><dt>Latency</dt><dd id="latency"></dd>
+<dt>May forward</dt><dd id="forward"></dd></dl>
+<p class="minor">This score was calibrated on the source-domain validation set. The external dataset showed substantial drift; this is research evidence, not production protection.</p>
+<div id="explanationBox" class="hidden"><label for="key">Optional OpenRouter key for Review explanation only</label>
+<input type="password" id="key" autocomplete="off"><button id="explain">Explain Review</button><p id="explanation"></p>
+<p class="minor">The LLM cannot change the Review decision. The key stays in this form for this request and is never saved by PromptGate.</p></div></section>
+<section class="panel"><h2>Evaluation boundary</h2><p>Input-only English screening. Review requires a human. The app does not run a downstream RAG assistant or execute tools.</p>
+<p class="minor">Benchmarks and dataset limitations are documented in the repository. No prompts are written to the local evaluation logs.</p></section>
+</main><script>
+const $=id=>document.getElementById(id);let last=null;
+$('run').onclick=async()=>{const prompt=$('prompt').value,model=$('model').value;$('error').textContent='';$('result').classList.add('hidden');$('run').disabled=true;
+try{const res=await fetch('/screen',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt,model})});const data=await res.json();if(!res.ok)throw Error(data.detail||'Screening failed');last={prompt,model};
+const b=$('badge');b.textContent=data.action;b.className='badge '+data.action;$('score').textContent=data.risk_score.toFixed(3)+' · '+data.score_kind;
+$('reason').textContent=data.reason;$('modelName').textContent=data.model;$('latency').textContent=data.latency_ms.toFixed(1)+' ms';
+$('forward').textContent=data.may_forward?'Yes':'No';$('result').classList.remove('hidden');$('explanationBox').classList.toggle('hidden',data.action!=='Review');$('explanation').textContent='';
+}catch(e){$('error').textContent=e.message}finally{$('run').disabled=false}};
+$('explain').onclick=async()=>{if(!last)return;const key=$('key').value;$('key').value='';$('explain').disabled=true;$('explanation').textContent='Calling explanation model…';
+try{const res=await fetch('/explain-review',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...last,api_key:key})});const data=await res.json();
+$('explanation').textContent=res.ok?(data.explanation||'Explanation unavailable: '+data.status):(data.detail||'Explanation unavailable');
+}catch(e){$('explanation').textContent='Explanation unavailable'}finally{$('explain').disabled=false}};
+</script></html>

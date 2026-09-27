@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "promptgate-course"
+version = "0.1.0"
+description = "Auditable prompt-injection screening for the PE6201 individual project"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.optional-dependencies]
+data = ["pyarrow>=18,<24"]
+ml = ["scikit-learn>=1.6,<2"]
+app = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1", "httpx>=0.27,<1"]
+
+[project.scripts]
+promptgate = "promptgate.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["promptgate*"]
+
+[tool.setuptools.package-data]
+promptgate = ["static/*.html"]

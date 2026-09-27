@@ -1,0 +1,39 @@
+{
+  "run": "teacher-11089-external-20260925-01",
+  "protocol": {
+    "train_rows": 11089,
+    "calibration_rows": 990,
+    "policy_rows": 991,
+    "external_rows": 662,
+    "threshold_source": "development policy split only",
+    "external_labels_seen_for_selection": false,
+    "selected_model": "naive_bayes"
+  },
+  "development_policy": {
+    "n": 991,
+    "attack_block_recall": 0.9957537155,
+    "benign_block_fpr": 0.0403846154,
+    "confusion": {"tp": 469, "fp": 21, "fn": 2, "tn": 499}
+  },
+  "slabs_remaining_test": {
+    "n": 2001,
+    "attack_block_recall": 0.9560439560,
+    "benign_block_fpr": 0.048
+  },
+  "external_original_662": {
+    "n": 662,
+    "attack_n": 263,
+    "benign_n": 399,
+    "attack_block_recall": 0.7984790875,
+    "benign_block_fpr": 0.4310776942,
+    "review_rate": 0.0,
+    "confusion": {"tp": 210, "fp": 172, "fn": 53, "tn": 227}
+  },
+  "comparison": {
+    "logistic_external_attack_block_recall": 0.6920152091,
+    "logistic_external_benign_block_fpr": 0.1604010025,
+    "hybrid_external_attack_block_recall": 0.7642585551,
+    "hybrid_external_benign_block_fpr": 0.3684210526,
+    "hybrid_external_review_rate": 0.2794561934
+  }
+}

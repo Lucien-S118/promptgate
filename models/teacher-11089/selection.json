@@ -1,0 +1,5 @@
+{
+  "selected": "naive_bayes",
+  "basis": "Highest policy-split binary recall at <=5% FPR; tie: lower FPR, then name.",
+  "external_labels_seen_for_selection": false
+}
