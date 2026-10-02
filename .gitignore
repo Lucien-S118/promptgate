@@ -14,3 +14,4 @@ models/
 !models/teacher-11089/*.joblib
 !models/teacher-11089/*.json
 .DS_Store
+tmp/

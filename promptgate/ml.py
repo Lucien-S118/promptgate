@@ -1,6 +1,7 @@
 """Train-only vocabulary; disjoint probability calibration and policy selection.
 
-External labels are only read by benchmark(), after both candidates and selection freeze.
+External outcomes are not used for fitting or selection. Data preparation separately
+inspects source labels for integrity checks; benchmark() scores frozen candidates.
 """
 from __future__ import annotations
 

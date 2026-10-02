@@ -1,0 +1,243 @@
+{
+  "normalization": "Unicode casefold + whitespace collapse; no fuzzy/semantic deduplication",
+  "before": {
+    "slabs_train": {
+      "rows": 11089,
+      "label_counts": {
+        "0": 6303,
+        "1": 4786
+      },
+      "duplicate_rows": 39
+    },
+    "slabs_validation": {
+      "rows": 2101,
+      "label_counts": {
+        "1": 1051,
+        "0": 1050
+      },
+      "duplicate_rows": 0
+    },
+    "slabs_test": {
+      "rows": 2101,
+      "label_counts": {
+        "1": 1051,
+        "0": 1050
+      },
+      "duplicate_rows": 0
+    },
+    "deepset_train": {
+      "rows": 546,
+      "label_counts": {
+        "0": 343,
+        "1": 203
+      },
+      "duplicate_rows": 0
+    },
+    "deepset_test": {
+      "rows": 116,
+      "label_counts": {
+        "1": 60,
+        "0": 56
+      },
+      "duplicate_rows": 0
+    }
+  },
+  "normalized_overlap_unique_texts": {
+    "slabs_train__slabs_validation": 4,
+    "slabs_train__slabs_test": 0,
+    "slabs_train__deepset_train": 0,
+    "slabs_train__deepset_test": 0,
+    "slabs_validation__slabs_test": 116,
+    "slabs_validation__deepset_train": 0,
+    "slabs_validation__deepset_test": 0,
+    "slabs_test__deepset_train": 0,
+    "slabs_test__deepset_test": 0,
+    "deepset_train__deepset_test": 0
+  },
+  "conflicting_texts": 1,
+  "priority": [
+    "deepset_test",
+    "deepset_train",
+    "slabs_test",
+    "slabs_validation",
+    "slabs_train"
+  ],
+  "removed": {
+    "deepset_test": {},
+    "deepset_train": {},
+    "slabs_test": {},
+    "slabs_validation": {
+      "overlap_with_higher_priority_split": 116
+    },
+    "slabs_train": {
+      "overlap_with_higher_priority_split": 4,
+      "within_split_duplicate": 38,
+      "conflicting_labels": 2
+    }
+  },
+  "after": {
+    "deepset_test": {
+      "rows": 116,
+      "label_counts": {
+        "1": 60,
+        "0": 56
+      }
+    },
+    "deepset_train": {
+      "rows": 546,
+      "label_counts": {
+        "0": 343,
+        "1": 203
+      }
+    },
+    "slabs_test": {
+      "rows": 2101,
+      "label_counts": {
+        "1": 1051,
+        "0": 1050
+      }
+    },
+    "slabs_validation": {
+      "rows": 1985,
+      "label_counts": {
+        "1": 942,
+        "0": 1043
+      }
+    },
+    "slabs_train": {
+      "rows": 11045,
+      "label_counts": {
+        "0": 6264,
+        "1": 4781
+      }
+    }
+  },
+  "seed": 6201,
+  "input_file_sha256": {
+    "prompt_injection_train.csv": "bab012fec95d4214599b18777fd6efc5cc5e9545354df581880aeca5c1d487d7",
+    "prompt_injection_validation.csv": "c7d14d24a14dd30a37ebe0de928b8ccdcdf6639c3c2e830b59561e2dd5fb7b55",
+    "prompt_injection_test.csv": "4c7a9f0fff2bf7d3f6d3e7b84863a8f5d6c48c70c3ac7fe874917074c8f27853",
+    "deepset_prompt_injection_train.parquet": "2e10bc7ab30f542c97e4e83e2a5683000b5057d25ec10908784c631d44124c04",
+    "deepset_prompt_injection_test.parquet": "39ac797cabc157eeed58435a08593b2952bb6cb16fc394a2d383f447cc7b246e"
+  },
+  "output_file_sha256": {
+    "train.jsonl": "77628b83ab48e1118c859115c01b21585ad995ca6b3da2b3505d5de73130f184",
+    "validation.jsonl": "ac93ff13da5bc0a3cb0f875335401b1d0cd60cb3f7b7068dbec89183699b3b16",
+    "mvp_100.jsonl": "27c98b5732d920326b6ebf9a109fac650656a4daf8b2ecd1e17ca6a325dc39bb",
+    "test_remaining.jsonl": "2859769ebc518a846a8d8650baaf9a42ac02b8de732759bbe49a590b7bd39b79",
+    "external_clean.jsonl": "259de0b1f6110685f68dd75706b28f0b8902cb881e48feb47bcc6af09ab5bc95",
+    "external_original_662.jsonl": "259de0b1f6110685f68dd75706b28f0b8902cb881e48feb47bcc6af09ab5bc95"
+  },
+  "output_sizes": {
+    "train": 11045,
+    "validation": 1985,
+    "mvp_100": 100,
+    "test_remaining": 2001,
+    "external_clean": 662,
+    "external_original_662": 662
+  },
+  "mvp_ids": [
+    "slabs_test:356",
+    "slabs_test:1281",
+    "slabs_test:646",
+    "slabs_test:1901",
+    "slabs_test:1700",
+    "slabs_test:800",
+    "slabs_test:264",
+    "slabs_test:1487",
+    "slabs_test:1857",
+    "slabs_test:1966",
+    "slabs_test:1554",
+    "slabs_test:1940",
+    "slabs_test:1250",
+    "slabs_test:1927",
+    "slabs_test:1564",
+    "slabs_test:1991",
+    "slabs_test:348",
+    "slabs_test:38",
+    "slabs_test:389",
+    "slabs_test:1648",
+    "slabs_test:519",
+    "slabs_test:2050",
+    "slabs_test:257",
+    "slabs_test:607",
+    "slabs_test:1951",
+    "slabs_test:1333",
+    "slabs_test:861",
+    "slabs_test:665",
+    "slabs_test:677",
+    "slabs_test:789",
+    "slabs_test:41",
+    "slabs_test:1894",
+    "slabs_test:266",
+    "slabs_test:711",
+    "slabs_test:850",
+    "slabs_test:1917",
+    "slabs_test:57",
+    "slabs_test:451",
+    "slabs_test:65",
+    "slabs_test:623",
+    "slabs_test:928",
+    "slabs_test:707",
+    "slabs_test:1513",
+    "slabs_test:1945",
+    "slabs_test:74",
+    "slabs_test:305",
+    "slabs_test:709",
+    "slabs_test:1343",
+    "slabs_test:22",
+    "slabs_test:1127",
+    "slabs_test:543",
+    "slabs_test:2090",
+    "slabs_test:1640",
+    "slabs_test:1540",
+    "slabs_test:1209",
+    "slabs_test:467",
+    "slabs_test:1926",
+    "slabs_test:606",
+    "slabs_test:351",
+    "slabs_test:712",
+    "slabs_test:14",
+    "slabs_test:1351",
+    "slabs_test:403",
+    "slabs_test:1349",
+    "slabs_test:574",
+    "slabs_test:78",
+    "slabs_test:1836",
+    "slabs_test:864",
+    "slabs_test:210",
+    "slabs_test:1470",
+    "slabs_test:743",
+    "slabs_test:1287",
+    "slabs_test:2055",
+    "slabs_test:972",
+    "slabs_test:456",
+    "slabs_test:996",
+    "slabs_test:763",
+    "slabs_test:97",
+    "slabs_test:863",
+    "slabs_test:2065",
+    "slabs_test:663",
+    "slabs_test:1563",
+    "slabs_test:118",
+    "slabs_test:600",
+    "slabs_test:683",
+    "slabs_test:632",
+    "slabs_test:1544",
+    "slabs_test:1257",
+    "slabs_test:1832",
+    "slabs_test:572",
+    "slabs_test:1844",
+    "slabs_test:1021",
+    "slabs_test:1453",
+    "slabs_test:1668",
+    "slabs_test:1097",
+    "slabs_test:832",
+    "slabs_test:251",
+    "slabs_test:81",
+    "slabs_test:2083",
+    "slabs_test:1983"
+  ],
+  "historical_exposure": "Public datasets were explored in August. This is a prospective frozen split, not a claim of never-seen data.",
+  "external_use": "deepset train and test are evaluation-only; raw and cleaned views must not be pooled or used to tune thresholds."
+}

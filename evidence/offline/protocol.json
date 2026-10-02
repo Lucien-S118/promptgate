@@ -1,0 +1,17 @@
+{
+  "selection_sha256": "c58e7d9cd891da03c134977c01cdbfb63e0f98ace0476e39944c4d8daa311535",
+  "source_sha256": {
+    "__init__.py": "f6f778e5d1d85061c42a407370ef6a1dc21b727ca11e53453ddd00a627dcccee",
+    "__main__.py": "21deadd927e9292a8597d1065df7038d16fd4f057234920031d532830bb7714c",
+    "baselines.py": "c52516f2a9406159b952130bdaec704a3097469fdb0b6669026cef7af3961ff2",
+    "contracts.py": "87715995a38b597e0621d2604c02a4f7965024df21e211ca01820a9234dbfa07",
+    "data.py": "84731e753d777b59cb972925e473498ee62e9f0036639141f0f52bc789d6c756",
+    "evaluate.py": "4ac478fc96be39c050cb85b77abb49177319befd1f479a49f70831c84312c59e",
+    "live_control.py": "46cb22026bf147907665f723bd86c72f74e49e97be464d3d66fd34d7de8101b6",
+    "llm.py": "952619a632db9a5674893c97177ff01b388f2d328cdc4dbfcd24416bbeb10bd9",
+    "metrics.py": "208b0643157da9e98c727de5a7076fa07851405daab80aaddb89ada829346a65",
+    "ml.py": "d0c59ff5737dc3e4210567195765d3ee340975714a11d5bffc062024a0432532"
+  },
+  "note": "All configurations frozen before reading test labels. Offline evidence; no LLM calls.",
+  "created_at_utc": "2026-09-25T08:40:18.862099+00:00"
+}

@@ -1,0 +1,34 @@
+{
+  "deepset_prompt_injection_test.parquet": {
+    "included": false,
+    "reason": "eval-only; no redistribution of prompt text",
+    "rows": 116,
+    "sha256": "39ac797cabc157eeed58435a08593b2952bb6cb16fc394a2d383f447cc7b246e",
+    "url": "https://huggingface.co/datasets/deepset/prompt-injections/resolve/4f61ecb038e9c3fb77e21034b22511b523772cdd/data/test-00000-of-00001-701d16158af87368.parquet"
+  },
+  "deepset_prompt_injection_train.parquet": {
+    "included": false,
+    "reason": "eval-only; no redistribution of prompt text",
+    "rows": 546,
+    "sha256": "2e10bc7ab30f542c97e4e83e2a5683000b5057d25ec10908784c631d44124c04",
+    "url": "https://huggingface.co/datasets/deepset/prompt-injections/resolve/4f61ecb038e9c3fb77e21034b22511b523772cdd/data/train-00000-of-00001-9564e8b05b4757ab.parquet"
+  },
+  "prompt_injection_test.csv": {
+    "included": true,
+    "rows": 2101,
+    "sha256": "4c7a9f0fff2bf7d3f6d3e7b84863a8f5d6c48c70c3ac7fe874917074c8f27853",
+    "url": "https://huggingface.co/datasets/S-Labs/prompt-injection-dataset/resolve/002a9dd18514abd021869823d6b0429b38606d99/data/test.csv"
+  },
+  "prompt_injection_train.csv": {
+    "included": true,
+    "rows": 11089,
+    "sha256": "bab012fec95d4214599b18777fd6efc5cc5e9545354df581880aeca5c1d487d7",
+    "url": "https://huggingface.co/datasets/S-Labs/prompt-injection-dataset/resolve/002a9dd18514abd021869823d6b0429b38606d99/data/train.csv"
+  },
+  "prompt_injection_validation.csv": {
+    "included": true,
+    "rows": 2101,
+    "sha256": "c7d14d24a14dd30a37ebe0de928b8ccdcdf6639c3c2e830b59561e2dd5fb7b55",
+    "url": "https://huggingface.co/datasets/S-Labs/prompt-injection-dataset/resolve/002a9dd18514abd021869823d6b0429b38606d99/data/validation.csv"
+  }
+}

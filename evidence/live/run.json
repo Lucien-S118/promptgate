@@ -1,0 +1,24 @@
+{
+  "package_version": "0.1.0",
+  "source_sha256": {
+    "__init__.py": "f6f778e5d1d85061c42a407370ef6a1dc21b727ca11e53453ddd00a627dcccee",
+    "__main__.py": "21deadd927e9292a8597d1065df7038d16fd4f057234920031d532830bb7714c",
+    "baselines.py": "c52516f2a9406159b952130bdaec704a3097469fdb0b6669026cef7af3961ff2",
+    "contracts.py": "25d008070f8d81b44a3c245ee46bc3dfc3fbdbe0b5ef64c45d3c01ac6486b1ff",
+    "data.py": "84731e753d777b59cb972925e473498ee62e9f0036639141f0f52bc789d6c756",
+    "evaluate.py": "4ac478fc96be39c050cb85b77abb49177319befd1f479a49f70831c84312c59e",
+    "live_control.py": "46cb22026bf147907665f723bd86c72f74e49e97be464d3d66fd34d7de8101b6",
+    "llm.py": "952619a632db9a5674893c97177ff01b388f2d328cdc4dbfcd24416bbeb10bd9",
+    "metrics.py": "208b0643157da9e98c727de5a7076fa07851405daab80aaddb89ada829346a65"
+  },
+  "backend": "llm",
+  "model": "openai/gpt-4o-mini",
+  "prompt_version": "screen-v1",
+  "max_output_tokens": 200,
+  "dataset_file": "mvp_100.jsonl",
+  "dataset_sha256": "27c98b5732d920326b6ebf9a109fac650656a4daf8b2ecd1e17ca6a325dc39bb",
+  "planned_n": 100,
+  "started_at_utc": "2026-09-22T08:01:21.389115+00:00",
+  "protocol": "Frozen rules/prompt; no tuning on this run. Review is separate from Block.",
+  "completion_evidence": "A summary.json file exists only after all planned rows finish."
+}
