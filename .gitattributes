@@ -1,0 +1,8 @@
+# Source snapshots and recorded evidence are byte-identical to frozen inputs.
+# Prevent Windows checkout newline conversion from breaking SHA-256 validation.
+* text=auto eol=lf
+/data_sources/** -text -whitespace
+/evidence/** -text
+/models/teacher-11089/** -text
+*.docx binary
+*.pdf binary
