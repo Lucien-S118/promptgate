@@ -6,15 +6,15 @@
 
 ## Problem and outcome
 
-I designed PromptGate to help an enterprise AI engineer screen hostile inputs before they reach a RAG assistant. My conclusion is that the prototype is useful for evaluating a screening policy, but its external false-positive rate is too high for production. The primary persona is Mei, an engineer releasing an assistant who understands model metrics but cannot inspect every request. She can use the console to distinguish Allow, Block and Review, instead of treating a fluent model explanation as permission. No organisational time savings or prevented incidents have been measured.
+I designed PromptGate to help an enterprise AI engineer screen hostile inputs before they reach a RAG assistant. The prototype runs, but my tests show that it blocks too many normal inputs to be ready for production. The primary user is Mei, an engineer preparing an assistant for release. She understands model metrics but cannot inspect every request. The console gives her an Allow, Block or Review decision and a reason. An LLM explanation cannot grant permission to forward an input. I have not measured organisational time savings or prevented incidents.
 
-The closest tool identified in my proposal was Protect AI LLM Guard. My contribution is a small, inspectable experiment with frozen policies, cross-dataset evaluation and explicit review costs, not a claim to outperform that product. The scope is one standalone English input. Retrieved documents, conversation history, model outputs, user identity and downstream tool execution remain outside this prototype.
+The closest tool identified in my proposal was Protect AI LLM Guard. This project tests a smaller screening policy whose decisions and review workload can be checked. I have not benchmarked it against LLM Guard. The scope is one standalone English input. Retrieved documents, conversation history, model outputs, user identity and downstream tool execution remain outside this prototype.
 
 ## Design and build or buy decisions
 
 I chose narrow supervised classification with deterministic routing. A regex baseline offers simplicity but recognises only fixed patterns. Labelled text supports a broader classifier without requiring an autonomous agent. The initial MVP was one prompt, one GPT-4o-mini structured-output call and one validated result. The final extension adds local classification, probability calibration, Review routing and a FastAPI console. An optional LLM explains Review only; code rejects explanation requests for other actions and never lets the explanation change the decision.
 
-I own the serving interface, orchestration, policy, data preparation and evaluation logic, using existing Python libraries rather than implementing machine learning from scratch. These layers determine what is forwarded and how performance is measured. I rent GPT-4o-mini through OpenRouter for the baseline and optional explanations. I exclude retrieval because the gateway does not answer questions, and skip low-code to retain control over split isolation, thresholds and failure tests. The local classifier avoids a per-request API fee, although hosting, maintenance and human review are not free. The 100-call baseline cost US$0.0066129, approximately US$0.000066 per call, with 3.42-second p95 latency. This measured cost does not establish the cost of Review explanations or a production service.
+I build the interface, routing policy, data preparation and evaluation with FastAPI and scikit-learn. The libraries provide serving and model fitting; project code controls decisions and checks results. I rent GPT-4o-mini through OpenRouter for the baseline and optional explanations. I exclude retrieval because the gateway does not answer questions, and skip low-code to keep direct control over splits, thresholds and failure tests. Included model files let a reviewer start the console without retraining or an API key; setup time was not measured. The local classifier avoids a per-request API fee, although hosting, maintenance and human review are not free. The 100-call baseline cost US$0.0066129, approximately US$0.000066 per call, with 3.42-second p95 latency. Review explanation costs were not measured.
 
 ## Data and experimental choices
 
@@ -42,7 +42,7 @@ I use OWASP Top 10 for LLM Applications 2025 as an AI-security framing, not a ce
 
 ## Next decision
 
-I would keep PromptGate as a research MVP. Before deployment, I would collect organisation-specific labels, agree on false-positive and review costs, retune only on a new development set, and evaluate once on a separate holdout. This project demonstrates a running gateway and an auditable evaluation, while showing why a strong development score is insufficient evidence for a production security decision.
+I would keep PromptGate as a research MVP. Before deployment, I would collect organisation-specific labels, agree on false-positive and review costs, retune only on a new development set, and evaluate once on a separate holdout. The current results give me a clear reason to delay deployment: the gateway runs, but its false blocks and review workload are too high.
 
 ## Evidence and sources
 
